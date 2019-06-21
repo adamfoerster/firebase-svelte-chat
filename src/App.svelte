@@ -8,7 +8,7 @@
   import "firebase/firestore";
   import { firebaseConfig } from "./firebaseConfig.js";
   import { authState } from "rxfire/auth";
-  import { first, startWith } from "rxjs/operators";
+  import { first, startWith, tap } from "rxjs/operators";
   import { collectionData } from "rxfire/firestore";
 
   firebase.initializeApp(firebaseConfig);
@@ -38,7 +38,8 @@
   };
 
   let messages = collectionData(db.collection("messages"), "id").pipe(
-    startWith([])
+    startWith([]),
+    tap(_ => setTimeout(_ => window.scrollTo(0,document.body.scrollHeight), 500))
   );
 </script>
 

@@ -1,17 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-<head>
-	<meta charset='utf8'>
-	<meta name='viewport' content='width=device-width'>
+  <head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width" />
 
-	<title>Svelte app</title>
+    <title>Svelte app</title>
 
-	<link rel='icon' type='image/png' href='favicon.png'>
-	<link rel='stylesheet' href='global.css'>
-	<link rel='stylesheet' href='bundle.css'>
-</head>
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="stylesheet" href="global.css" />
+    <link rel="stylesheet" href="bundle.css" />
+  </head>
 
-<body>
-	<script src='bundle.js'></script>
-</body>
+  <body>
+    <div
+      id="splash"
+      style="background-color: darkcyan; display: flex; height: 100vh; justify-content: center; align-items: center;"
+    >
+      <img src="./logo.png" alt="Chat" width="100" />
+    </div>
+    <script src="bundle.js"></script>
+  </body>
 </html>

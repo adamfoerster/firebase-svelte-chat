@@ -1,68 +1,44 @@
-*Psst — looking for a shareable component template? Go here --> [sveltejs/component-template](https://github.com/sveltejs/component-template)*
-
----
-
-# svelte app
-
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
-
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
-
 ```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
-```
-
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
-npm install
-```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
+npm install -g firebase-tools
+npx degit sveltejs/template frontend-cwb
+firebase init
+cd frontend-cwb
+npm i
+npm i rxfire firebase rxjs --save
+code .
 npm run dev
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-
-## Deploying to the web
-
-### With [now](https://zeit.co/now)
-
-Install `now` if you haven't already:
-
-```bash
-npm install -g now
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 ```
 
-Then, from within your project folder:
-
-```bash
-now
+```js
+export const firebaseConfig = {
+  apiKey: "AIzaSyDUP9ngowjCNFvHPwPcxSkoNWq6C5l2IQ0",
+  authDomain: "frontendcwb.firebaseapp.com",
+  databaseURL: "https://frontendcwb.firebaseio.com",
+  projectId: "frontendcwb",
+  storageBucket: "frontendcwb.appspot.com",
+  messagingSenderId: "738766646644",
+  appId: "1:738766646644:web:bedf7464ce2908b1"
+};
 ```
 
-As an alternative, use the [Now desktop client](https://zeit.co/download) and simply drag the unzipped project folder to the taskbar icon.
+```js
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import { firebaseConfig } from "./firebaseConfig.js";
+import { authState } from "rxfire/auth";
 
-### With [surge](https://surge.sh/)
+firebase.initializeApp(firebaseConfig);
 
-Install `surge` if you haven't already:
+const db = firebase.firestore();
+const auth = firebase.auth();
+const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
-npm run build
-surge public
+let user = authState(auth);
 ```
