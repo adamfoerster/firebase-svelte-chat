@@ -1,8 +1,8 @@
 ```bash
 npm install -g firebase-tools
 npx degit sveltejs/template frontend-cwb
-firebase init
 cd frontend-cwb
+firebase init
 npm i
 npm i rxfire firebase rxjs --save
 code .
@@ -41,4 +41,28 @@ const auth = firebase.auth();
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 
 let user = authState(auth);
+```
+
+```js
+auth.signInWithRedirect(googleProvider);
+// get messages
+import { collectionData } from "rxfire/firestore";
+import { startWith, tap, first } from 'rxjs/operators'; 
+let messages = collectionData(db.collection("messages"), "id").pipe(
+  startWith([]),
+  tap(_ => setTimeout(_ => window.scrollTo(0,document.body.scrollHeight), 500))
+);
+// send message
+const sendMessage = ev => {
+  return user.pipe(first()).subscribe(u =>
+    db
+      .collection("messages")
+      .doc(new Date().getTime().toString())
+      .set({
+        displayName: u.displayName,
+        photoURL: u.photoURL,
+        text: ev.detail
+      })
+  );
+};
 ```
