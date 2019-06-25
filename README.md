@@ -1,3 +1,4 @@
+no terminal
 ```bash
 npm install -g firebase-tools
 npx degit sveltejs/template frontend-cwb
@@ -9,12 +10,13 @@ code .
 npm run dev
 ```
 
+index.html
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 ```
-
+crie o arquivo src/firebaseConfig.js. substitua os dados pelos corretos para o seu projeto
 ```js
 export const firebaseConfig = {
   apiKey: "AIzaSyDUP9ngowjCNFvHPwPcxSkoNWq6C5l2IQ0",
@@ -27,6 +29,7 @@ export const firebaseConfig = {
 };
 ```
 
+importações no src/App.svelte
 ```js
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -43,6 +46,7 @@ const googleProvider = new firebase.auth.GoogleAuthProvider();
 let user = authState(auth);
 ```
 
+funções de busca e inserção de mensagens
 ```js
 auth.signInWithRedirect(googleProvider);
 // get messages
